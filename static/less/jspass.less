@@ -1,0 +1,32 @@
+@import "reset";
+@import "global";
+body{
+  background:url('/static/images/b/bg.jpg');
+}
+/**smallnote组件**/
+.smallnote{
+    background-color:#F8F8CD;
+    .border-radius(3px);
+   .box-shadow(1px,1px,5px);
+    color:#333333;
+    line-height:15px;
+    padding:8px 30px;
+    position:fixed;
+    text-align:center;
+    top:0;
+    z-index:2000;
+    _position:absolute;
+    &.error{
+      background:#F8F8CD 30px center no-repeat;
+      color:#B43830;
+      padding-left:45px;
+    }
+}
+/**smallnote结束**/
+/**各种组件结束**/
+.left{
+  float:left;
+}
+.right{
+  float:right;
+}

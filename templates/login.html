@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/apps/login.css'|staticurl }}" />
+{% endblock %}
+{% block scripts %}
+  <script src="{{ '/static/js/apps/login.js'|staticurl }}"></script>
+{% endblock %}
+{% block mainbody %}
+<div class="center clearfix">
+    <div id="login">
+        {% if error%}
+            <div class="alert alert-error">
+                {{ error }}
+            </div>
+        {% endif %}
+        {% include "modules/login_tmpl.html" %}
+    </div>
+</div>
+{% endblock %}

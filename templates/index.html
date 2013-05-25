@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/apps/index.css'|staticurl }}" />
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/lib/highlight/default.css'|staticurl }}" />
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="{{ '/static/js/lib/highlight.js'|staticurl }}"></script>
+  <script src="{{ '/static/js/apps/index.js'|staticurl }}"></script>
+  <script src='https://cdn.firebase.com/v0/firebase.js'></script>
+  <script type="text/javascript" src="{{ '/static/js/modules/firebase.js'|staticurl }}"></script>
+{% endblock %}
+{% block mainbody %}
+<div class="center clearfix">
+    <div class="center-right">
+        <ul>
+            {% for codeshare in codeshares %}
+            <li>
+                <a href="/share/{{codeshare.share_id}}/">{{codeshare.title}}</a>
+                <span>{{codeshare.language}} | {{codeshare.created}}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <form name="codepass" action="" method="post">
+        <div class="center-left">
+            {% if error %}
+                <div class="alert error">{{  error }}</div>
+            {% endif %}
+            <div class="content-title">
+                <span class="icon-tasks"></span>
+                <span>New Code Pass</span>
+            </div>
+            <textarea id="codeinput" class="codepass" name="code">{{ request.form.get('code','') }}</textarea>
+            <div class="content-title">
+                <span class="icon-tasks"></span>
+                <span>Code Pass Setting</span>
+            </div>
+            <div id="result" class="result well">
+                <pre>
+                    <code></code>
+                </pre>
+            </div>
+            <div class="codeoption form-horizontal">
+                <div class="optionpanel control-group">
+                    <label class="control-label">选择语言：</label>
+                    <div class="controls">
+                        <div class="input-append">
+                          <input class="optiontag span2" type="text" placeholder="要高亮的语言">
+                          <input name="language" type="hidden">
+                          <div class="btn-group">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                            <ul class="optionmenu dropdown-menu">
+                              <li><a data-tag="json">JSON</a></li>
+                              <li><a data-tag="html">HTML</a></li>
+                              <li><a data-tag="css">CSS</a></li>
+                              <li><a data-tag="javascript">JAVASCRIPT</a></li>
+                              <li class="divider"></li>
+                              <li><a data-tag="python">PYTHON</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="optionpanel control-group">
+                    <label class="control-label">分享权限：</label>
+                    <div class="controls">
+                        <div class="input-append">
+                          <input class="optiontag span2" type="text" value="完全公开">
+                          <input name="exposure" type="hidden" value="1">
+                          <div class="btn-group">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                            <ul class="optionmenu dropdown-menu">
+                              <li><a data-tag="1">完全公开</a></li>
+                              <li><a data-tag="2">不能被搜索</a></li>
+                              <li class="{% if not g.user %}disable{% endif %}"><a data-tag="3">私有分享</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">分享标题：</label>
+                    <div class="controls">
+                        <input class="span3" name="title" type="text" placeholder="说两句">
+                    </div>
+                  </div>
+                <input type="submit" class="btn" value="生成分享链接"/>
+            </div>
+        </div>
+    </form>
+    
+</div>
+{% endblock %}

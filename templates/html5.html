@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/apps/code.css'|staticurl }}" />
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/lib/highlight/default.css'|staticurl }}" />
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="{{ '/static/js/lib/highlight.js'|staticurl }}"></script>
+  <script src="{{ '/static/js/apps/code.js'|staticurl }}"></script>
+{% endblock %}
+{% block mainbody %}
+<div class="center clearfix">
+    html5
+</div>
+{% endblock %}

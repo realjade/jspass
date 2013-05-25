@@ -1,0 +1,63 @@
+/*基本类和函数*/
+/*基本类和函数*/
+/***************border圆角**********************/
+/***************方块阴影**********************/
+/***************元素过度效果**********************/
+/****************旋转，转换***********************/
+/****************线性颜色渐变***********************/
+/****************快速颜色渐变***********************/
+/****************镜像效果***********************/
+/****************透明效果***********************/
+/****************处理越界***********************/
+.font-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.center .center-left {
+  margin-right: 200px;
+  margin-left: 10px;
+}
+.center .center-left .content-title {
+  border-bottom: 1px dotted #CCC;
+}
+.center .center-left .content-title span {
+  vertical-align: middle;
+  color: #333;
+  font-size: 14px;
+  font-weight: bolder;
+}
+.center .center-left .codepass {
+  background-color: #F8F8F8;
+  border: 1px solid #DDD;
+  margin: 10px 0;
+  padding: 5px;
+  display: block;
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace, serif;
+  font-size: 10pt;
+  padding: 1%;
+  width: 98%;
+  line-height: 21px;
+  height: 260px;
+}
+.center .center-left .result {
+  margin-top: 10px;
+}
+.center .center-left .codeoption .span2 {
+  width: 174px !important;
+}
+.center .center-right {
+  border-bottom: 1px dotted #CCC;
+  border-left: 1px dotted #CCC;
+  float: right;
+  padding: 0 10px;
+  width: 160px;
+}
+.center .center-right a {
+  font-size: 14px;
+}
+.center .center-right span {
+  color: #666;
+  display: block;
+}

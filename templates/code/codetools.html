@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/lib/codemirror.css'|staticurl }}" />
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/apps/codetools.css'|staticurl }}" />
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="{{ '/static/js/lib/codemirror.js'|staticurl }}"></script>
+  <script type="text/javascript" src="{{ '/static/js/apps/code/matchbrackets.js'|staticurl }}"></script>
+  <script type="text/javascript" src="{{ '/static/js/apps/code/continuecomment.js'|staticurl }}"></script>
+  <script src="{{ '/static/js/apps/codetools.js'|staticurl }}"></script>
+{% endblock %}
+{% block mainbody %}
+<div class="center clearfix">
+    <div class="tabbable tabs-left">
+      <ul id="codenav" class="nav nav-tabs">
+        <li class="active"><a href="#json" data-toggle="tab">JSON转换</a></li>
+        <li class=""><a href="#javascript" data-toggle="tab">JS编辑器</a></li>
+        <li class=""><a href="#url" data-toggle="tab">URL转义</a></li>
+        <li class=""><a href="#xml" data-toggle="tab">XML转换</a></li>
+        <li class=""><a href="#endecode" data-toggle="tab">编码转换</a></li>
+        <li class=""><a href="#codeshare" data-toggle="tab">CODE格式化</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="json">
+          <div class="jsonpanel">
+            <textarea class="jsoninput">{"json": "json"}</textarea>
+            <div class="jsonshow">
+              <pre><code class="jsonbeauty"></code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="javascript">
+          <textarea class="codeinput">
+//javascript hello world 程序
+function helloWorld(){
+  alert("hello JsPass");
+}
+helloWorld();</textarea>
+        </div>
+        <div class="tab-pane" id="url">
+          <p>url</p>
+        </div>
+        <div class="tab-pane" id="xml">
+          <p>xml</p>
+        </div>
+        <div class="tab-pane" id="endecode">
+          <p>endecode</p>
+        </div>
+        <div class="tab-pane" id="codeshare">
+           <textarea class="codeinput" name="code"></textarea>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

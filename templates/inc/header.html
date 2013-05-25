@@ -1,0 +1,79 @@
+<header>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a href="/" class="logo"><img src="{{ '/static/images/logo/logo.png'|staticurl }}" alt="JSPASS" /></a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav">
+                <li class="{{'active'|ifdefault(tab=='codetools')}}"><a href="/">CodeTools</a></li>
+                <li class="{{'active'|ifdefault(tab=='html5')}}"><a href="/html5/">HTML5</a></li>
+                <li class="{{'active'|ifdefault(tab=='discuss')}}"><a href="/discuss/">讨论区</a></li>
+                <li class="{{'active'|ifdefault(tab=='example')}}"><a href="/example/">示例区</a></li>
+                <li class="dropdown {{'active'|ifdefault(tab=='resource')}}">
+                  <a href="/resource/" class="dropdown-toggle" data-toggle="dropdown">学习区<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-header">WEB前端</li>
+                    <li><a href="/resource/html/">HTML</a></li>
+                    <li><a href="/resource/css/">CSS</a></li>
+                    <li><a href="/resource/js/">JAVASCRIPT</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">WEB服务器短</li>
+                    <li><a href="/resource/nodejs/">NODEJS</a></li>
+                    <li><a href="/resource/python/">PYTHON</a></li>
+                  </ul>
+                </li>
+            </ul>
+            <form class="navbar-search pull-right" action="/search/" method="post">
+                <div class="input-append">
+                  <input class="span3" name="search" type="text" placeholder="搜问题，搜代码">
+                  <button class="btn" type="submit">搜索</button>
+                </div>
+            </form>
+            <ul class="nav pull-right">
+                <li class="divider-vertical"></li>
+                {% if g.user %}
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎您：{{ g.user.username }}</a>
+                    </li>
+                    <li><a href="/logout/">退出</a></li>
+                {% else %}
+                    <li><a data-target="#loginpanel" data-toggle="modal">登录</a></li>
+                    <li><a data-target="#registerpanel" data-toggle="modal">注册</a></li>
+                {% endif %}
+              </ul>
+          </div><!-- /.nav-collapse -->
+        </div>
+      </div><!-- /navbar-inner -->
+    </div>
+      <div id="loginpanel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">登录JSParse</h3>
+          </div>
+          <div class="modal-body">
+            {% include "modules/login_tmpl.html" %}
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+            <button id="loginbtn" class="btn btn-primary">登录</button>
+          </div>
+      </div>
+      <div id="registerpanel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">注册JSParse</h3>
+          </div>
+          <div class="modal-body">
+            {% include "modules/register_tmpl.html" %}
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+            <button id="registerbtn" class="btn btn-primary">注册</button>
+          </div>
+      </div>
+</header>
