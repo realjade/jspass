@@ -17,14 +17,13 @@
         <li class="active"><a href="#json" data-toggle="tab">JSON转换</a></li>
         <li class=""><a href="#javascript" data-toggle="tab">JS编辑器</a></li>
         <li class=""><a href="#url" data-toggle="tab">URL转义</a></li>
-        <li class=""><a href="#xml" data-toggle="tab">XML转换</a></li>
-        <li class=""><a href="#endecode" data-toggle="tab">编码转换</a></li>
-        <li class=""><a href="#codeshare" data-toggle="tab">CODE格式化</a></li>
+        <li class=""><a href="#xmltojson" data-toggle="tab">XML TO JSON</a></li>
+        <li class=""><a href="#endecode" data-toggle="tab">utf8转换</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="json">
-          <div class="jsonpanel">
-            <textarea class="jsoninput">{"json": "json"}</textarea>
+          <div class="jsonpanel resizepanel">
+            <textarea class="jsoninput textinput">{"web": "jspass"}</textarea>
             <div class="jsonshow">
               <pre><code class="jsonbeauty"></code></pre>
             </div>
@@ -39,16 +38,40 @@ function helloWorld(){
 helloWorld();</textarea>
         </div>
         <div class="tab-pane" id="url">
-          <p>url</p>
+          <div class="resizepanel">
+            <textarea class="urlinput" placeholder="要转义的URL"></textarea>
+            <br/>
+            <select class="urltype">
+              <option value="escape">escape</option>
+              <option value="encodeURI">encodeURI</option>
+              <option value="encodeURIComponent">encodeURIComponent</option>
+            </select>
+            <br/>
+            <textarea class="urlresult" placeholder="转义后的结果"></textarea>
+            <select class="urluntype">
+              <option value="unescape">unescape</option>
+              <option value="decodeURI">decodeURI</option>
+              <option value="decodeURIComponent">decodeURIComponent</option>
+            </select>
+            <br/>
+            <textarea class="urlunresult" placeholder="反转义后的结果"></textarea>
+          </div>
         </div>
-        <div class="tab-pane" id="xml">
-          <p>xml</p>
+        <div class="tab-pane" id="xmltojson">
+          <div class="resizepanel">
+            <textarea class="xmlinput textinput"><xml><web>jspass</web></xml></textarea>
+            <div class="xmlshow">
+              <pre><code class="jsonbeauty"></code></pre>
+            </div>
+          </div>
         </div>
         <div class="tab-pane" id="endecode">
-          <p>endecode</p>
-        </div>
-        <div class="tab-pane" id="codeshare">
-           <textarea class="codeinput" name="code"></textarea>
+          <textarea class="utffrom textinput" placeholder="要转义的中文"></textarea>
+          <br/><br/>
+          <span class="utfencode btn">中文转UTF8</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="utfdecode btn">UTF8转中文</span>
+          <br/><br/>
+          <textarea class="utfto textinput" placeholder="utf8编码结果"></textarea>
         </div>
       </div>
     </div>

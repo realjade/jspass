@@ -32,6 +32,7 @@ seajs.config({
     alias: {
         'code-javascript':'/static/js/apps/code/javascript.js',
         'code-json':'/static/js/apps/code/json.js',
+        'code-xmltojson':'/static/js/apps/code/xmltojson.js',
         'code-python':'/static/js/apps/code/python.js',
         'highlight':'/static/js/lib/highlight.js',
         'highlight-css':'/static/css/lib/highlight/default.css'

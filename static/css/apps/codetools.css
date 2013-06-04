@@ -20,13 +20,28 @@
 .CodeMirror span {
   font-size: 16px;
 }
-.jsoninput {
-  width: 827px;
-  height: 50%;
+.textinput {
+  width: 824px;
+  height: 200px;
+}
+#url textarea {
+  width: 824px;
 }
 .jsonshow {
   margin-top: 20px;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+}
+.xmlshow {
+  margin-top: 20px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+.urltype,
+.urlresult,
+.urluntype,
+.urlunresult {
+  margin-top: 10px;
 }

@@ -9,25 +9,9 @@ $.fn.jsoninput = function() {
         bindEvent();
     });
     function bindEvent(){
-        var before = -1,
-            time = null;
-        jsoninput.keyup(function(){
-            var now = Date.now();
-            if(time){
-                clearTimeout(time);
-            }
-            if(before){
-                if(now - before > 1000){
-                    render(jsoninput.val());
-                }else{
-                    time = setTimeout(render,1000);
-                }
-            }else{
-                before = Date.now();
-            }
-        });
+        jsoninput.delayinput(render);
     }
-    function render(code){
+    function render(){
     　　var code = code || jsoninput.val();
         var bstr = jsonBeauty(code);
         if(!bstr)

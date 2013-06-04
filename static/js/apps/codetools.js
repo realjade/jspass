@@ -18,6 +18,59 @@ jQuery(function() {
                     resize();
                 }); 
             },
+            'url':function(){
+                if(codeEditor['url'])
+                    return;
+                codeEditor['url'] = true;
+                var urlpanel = $('#url'),
+                    urlinput = $('.urlinput',urlpanel),
+                    urltype = $('.urltype',urlpanel),
+                    urlresult = $('.urlresult',urlpanel),
+                    urluntype = $('.urluntype',urlpanel),
+                    urlunresult = $('.urlunresult',urlpanel),
+                    before = -1,
+                    time = null;
+                urlinput.delayinput(renderResult);
+                urltype.change(renderResult);
+                function renderResult(){
+                    urlresult.val(window[urltype.val()]($.trim(urlinput.val())));
+                }
+                urlresult.delayinput(renderUnResult);
+                urluntype.change(renderUnResult);
+                function renderUnResult(){
+                    urlunresult.val(window[urluntype.val()]($.trim(urlresult.val())));
+                }
+            },
+            'xmltojson':function(){
+                if(codeEditor['xmltojson'])
+                    return;
+                seajs.use(['highlight','highlight-css','code-xmltojson'],function(){
+                    codeEditor['xmltojson'] = true;
+                    var xmlpanel = $('#xmltojson'),
+                        xmlinput = $('.xmlinput',xmlpanel),
+                        xmlresult = $('.jsonbeauty',xmlpanel);
+                    xmlinput.delayinput(tojson);
+                    function tojson(){
+                        var json = $.xml2json($.trim(xmlinput.val()));
+                        json && xmlresult.html(hljs.highlight('json',JSON.stringify(json,'undefined',4)).value);
+                    }
+                    tojson();
+                }); 
+            },
+            'endecode':function(){
+                if(codeEditor['endecode'])
+                    return;
+                codeEditor['endecode'] = true;
+                var panel = $('#endecode'),
+                    utffrom = $('.utffrom',panel),
+                    utfto = $('.utfto',panel);
+                $('.utfencode',panel).click(function(){
+                    utfto.val(utffrom.val().replace(/[^\u0000-\u00FF]/g,function($0){return escape($0).replace(/(%u)(\w{4})/gi,"&#x$2;")}));
+                });
+                $('.utfdecode',panel).click(function(){
+                    utffrom.val(unescape(utfto.val().replace(/&#x/g,'%u').replace(/;/g,'')));
+                });
+            },
             'javascript':codeMirror
         }[tab])(tab);
       }
@@ -56,7 +109,7 @@ jQuery(function() {
     $(window).resize(resize);
     function resize(){
         var height = $(window).height();
-        $('.CodeMirror').height(height-125);
-        $('.jsonpanel').height(height-135);
+        $('.CodeMirror').css('min-height',height-125);
+        $('.resizepanel').css('min-height',height-135);
     }
 });

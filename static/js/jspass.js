@@ -461,6 +461,203 @@ jQuery(function () {
     }
 });*/
 
+//时间限制输入框
+$(function(){
+    $.fn.delayinput = function(callback) {
+        var before = -1,
+            time = null;
+        $(this).keyup(function(){
+            var now = Date.now();
+            if(time){
+                clearTimeout(time);
+            }
+            if(before){
+                if(now - before > 1000){
+                    callback && callback.call();
+                }else{
+                    time = setTimeout(callback&&jQuery.noop,1000);
+                }
+            }else{
+                before = Date.now();
+            }
+        });
+    }
+});
+
+// 弹窗单例管理
+DialogManager = {
+    present: null,
+    
+    keepSingle: function (dialog) {
+        if (this.present instanceof CommonDialog) {
+            this.present.close(dialog.options.modal);
+            this.present = null;
+        }
+        if(!dialog.options.modal)
+            this.present = dialog;
+        this.bindEvent();
+    },
+
+    escCancel: function (e) {
+        if (e.keyCode == 27 && DialogManager.present) {
+            var dialog = DialogManager.present,
+                element = dialog.element;
+
+            if (element.is(':visible') && element.css('top').toInt() > 0) {
+                dialog.hide();
+            }
+        }
+    },
+
+    bindEvent: function () {
+        jQuery(document).keydown(this.escCancel);
+        this.bindEvent = jQuery.noop;
+    }
+};
+
+// 弹窗
+CommonDialog = function(o){
+    this.options={
+        width: 560,
+        title: '提示',
+        message: '你木有事做吗？你真的木有事做吗？那你替我写封情书给布娃娃吧~',
+        isFixed: true,
+        denyEsc: false,
+        modal: true,
+        minify: false,
+        independence: false,
+        isAlert:false,
+        isConfirm:false,
+        okText:'确定',
+        cancelText:'取消',
+        okCallback:jQuery.noop,
+        cancelCallback:jQuery.noop
+    };
+    jQuery.extend(this.options, o);
+    this.init();
+};
+CommonDialog.prototype={
+    init:function(message, options){
+        //做个参数格式兼容 方便调用
+        if (typeof message === 'object') {
+            this.setOptions(message);
+        }
+        else if (typeof message === 'string') {
+            this.options.message = message;
+            this.setOptions(options);
+        }
+
+        var element = this.element = this.getElement();
+        this.bindEvent();
+
+        // 保持单例
+        if (this.options.independence !== true) DialogManager.keepSingle(this);
+
+        // 添加到页面
+        DOMPanel.append(element);
+
+        // 定位
+        this.offset = new Offset(element, {
+            top: this.options.top,
+            left: this.options.left
+        });
+
+        // 显示
+        this.show();
+    },
+    getElement: function () {
+        var fragment = ['<div class="common-dialog">', '<div class="wrapper">', '<header>', '<h3 class="title">',
+        this.options.title, '</h3>',
+        this.options.minify ? '<a class="minify">最小</a>' : '', '<a class="icon-remove icon-white close"></a>', '</header>', '<section>',
+        this.options.message, '</section>', '</div>', '</div>'].join('');
+        var element = jQuery(fragment);
+        if(this.options.isAlert){
+            element.find('.wrapper').append('<footer><input type="button" value="' + this.options.okText + '" class="input-ok btn btn-primary" /></footer>');
+        }
+        if(this.options.isConfirm){
+            element.find('.wrapper').append('<footer><input type="button" value="' + this.options.okText + '" class="input-ok btn btn-primary" /></footer>');
+            element.find('footer').append('<input type="button" value="' + this.options.cancelText + '" class="input-cancel btn" />');
+        }   
+        // 设置样式
+        element.css({
+            width: this.options.width
+        });
+        if (this.isFixed === true && jQuery.support.fixed) {
+            element.css({
+                position: 'fixed'
+            });
+        }
+        
+        return element;
+    },
+    reLocation:function(){
+        // 定位
+        this.offset = new Offset(this.element, {
+            top: this.options.top,
+            left: this.options.left
+        });
+    },
+    setWith:function(width){
+        // 设置样式
+        this.element.css({
+            width: width
+        });
+        this.options.width = width;
+    },
+    getHeader: function () {
+        return this.find('.wrapper > header');
+    },
+    
+    getFooter: function () {
+        return this.find('.wrapper > footer');
+    },
+
+    show: function () {
+        if (this.options.modal === true) MaskLayer.show();
+        this.element.show();
+        this.offset.setOffset();
+    },
+
+    hide: function () {
+        MaskLayer.hide();
+        this.element.css('top', '-9999px');
+    },
+
+    minimize: function () {
+        MaskLayer.hide();
+        this.element.css('top', '-9999px');
+    },
+
+    close: function (keepMask) {
+        !keepMask && MaskLayer.hide();
+        this.element.remove();
+    },
+
+    find: function (rule) {
+        return this.element.find(rule);
+    },
+
+    bindEvent: function () {
+        var self = this;
+        this.find('header .close').click(function () {
+            self.hide();
+        });
+        this.find('header .minify').click(function () {
+            self.minimize();
+        });
+        this.element.find('footer .input-ok').click(function () {
+            if (self.options.okCallback.call(self) !== false) {
+                self.hide();
+            }
+        });
+        this.element.find('footer .input-cancel').click(function () {
+            if (self.options.cancelCallback.call(self) !== false) {
+                self.hide();
+            }
+        });
+    }
+};
+
 // 全局AJAX请求失败处理
 jQuery(document).ajaxError(function(e, xmlhttp, opt) {
     if(xmlhttp.readyState == 4)
