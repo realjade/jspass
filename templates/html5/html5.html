@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+  <link type="text/css" rel="stylesheet" href="{{ '/static/css/apps/html5/html5.css'|staticurl }}" />
+{% endblock %}
+{% block scripts %}
+  <script src="{{ '/static/js/apps/html5/html5.js'|staticurl }}"></script>
+{% endblock %}
+{% block mainbody %}
+<div class="center clearfix">
+    <canvas style="border:1px solid #000;" id="drawing" width="200px" height="200px">画点什么吧</canvas>
+    <img id="img" />
+</div>
+{% endblock %}

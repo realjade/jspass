@@ -46,7 +46,7 @@ def share(share_id = None):
 @module.route('/html5/', methods=['GET', 'POST'])
 def html5():
     """index"""
-    return render_template('html5.html',tab = 'html5')
+    return render_template('html5/html5.html',tab = 'html5')
 
 @module.route('/discuss/', methods=['GET', 'POST'])
 def discuss():
