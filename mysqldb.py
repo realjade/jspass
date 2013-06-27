@@ -69,7 +69,7 @@ ADD UNIQUE INDEX `share_id_index` (`share_id` ASC);
 ''',
 ]
 config = {}
-config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:111111@localhost:3306/jspass?charset=utf8'
+config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:111111@127.0.0.1:3306/jspass?charset=utf8'
 config['SQLALCHEMY_POOL_SIZE'] = 3
 config['SQLALCHEMY_POOL_MAX_OVERFLOW'] = 3
 

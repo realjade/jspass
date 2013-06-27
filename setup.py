@@ -25,6 +25,7 @@ setup(
                       'redis',
                       'captchaimage',
                       'pystache',
-                      'Flask-Cache'
+                      'Flask-Cache',
+                      'pil'
                       ]
 )
