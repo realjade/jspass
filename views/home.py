@@ -43,6 +43,11 @@ def share(share_id = None):
     print code
     return render_template('code/share.html',tab='index', codeshare = share, code = code, error = error)
 
+@module.route('/baidumap/', methods=['GET', 'POST'])
+def baidumap():
+    """index"""
+    return render_template('leaning/baidumap.html',tab = 'html5')
+
 @module.route('/html5/', methods=['GET', 'POST'])
 def html5():
     """index"""
