@@ -40,6 +40,13 @@ header .logo img{
   overflow: hidden;
 }
 
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus{
+  background: #f7f7f7;
+}
+
+.operator{
+  padding: 20px;
+}
 .font-wrap {
   white-space: nowrap;
   overflow: hidden;
@@ -53,6 +60,19 @@ header .logo img{
     right: 0px;
     top:0px;
     height:32px; 
+}
+.city{
+  font-size: 12px;
+  line-height: 15px;
+  height: 15px;
+  display: inline-block;
+  color: #4c4c4c;
+  text-decoration: none;
+  padding-right: 15px;
+  margin: 8px 15px;
+}
+.city:hover{
+  color: #4c73c2;
 }
 #map{
   position: absolute;
