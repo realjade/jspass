@@ -20,11 +20,12 @@ models.setup(app)
 
 assets = Assets(app)
 
-from views import main, home, photo
+from views import main, home, photo, baidumap
 
 app.register_blueprint(main.module)
 app.register_blueprint(home.module)
 app.register_blueprint(photo.module)
+app.register_blueprint(baidumap.module)
 
 from lib import filters
 filters.setup(app)
